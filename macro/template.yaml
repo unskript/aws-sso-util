@@ -37,6 +37,9 @@ Parameters:
   S3PutObjectArgs:
     Type: String
     Default: ""
+  CacheExpirationSeconds:
+    Type: String
+    Default: "300"
 Outputs:
   MacroName:
     Value: !Ref Macro
@@ -111,6 +114,7 @@ Resources:
           NUM_CHILD_STACKS: !Ref NumChildStacks
           DEFAULT_SESSION_DURATION: !Ref DefaultSessionDuration
           CHILD_TEMPLATES_IN_YAML: !Ref ChildTemplatesInYaml
+          CACHE_EXPIRATION_SECONDS: !Ref CacheExpirationSeconds
       Policies:
         Version: "2012-10-17"
         Statement:
