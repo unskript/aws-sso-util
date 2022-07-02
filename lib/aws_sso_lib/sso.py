@@ -179,7 +179,9 @@ def get_boto3_session(
         region: str,
         login: bool=False,
         sso_cache=None,
-        credential_cache=None) -> boto3.Session:
+        credential_cache=None,
+        force_refresh: bool=False,
+        disable_browser: bool=False) -> boto3.Session:
     """Get a boto3 session with the input configuration.
 
     Args:
@@ -193,6 +195,9 @@ def get_boto3_session(
             the default file cache in ~/.aws/sso/cache .
         credential_cache: A dict-like object to cache the role credentials in to
             replace the default in-memory cache.
+        force_refresh(bool): Always go through the authentication process.
+        disable_browser: Skip the browser popup
+            and only print a message with the URL and code.
 
     Returns:
         A boto3 Session object configured for the account and role.
@@ -200,7 +205,7 @@ def get_boto3_session(
     account_id = format_account_id(account_id)
 
     if login:
-        _login(start_url, sso_region, sso_cache=sso_cache)
+        _login(start_url, sso_region, sso_cache=sso_cache, force_refresh=force_refresh, disable_browser=disable_browser)
 
     botocore_session = _get_botocore_session(start_url, sso_region, account_id, role_name,
         credential_cache=credential_cache,
