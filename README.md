@@ -180,3 +180,12 @@ These templates can then be packaged and uploaded using [`aws cloudformation pac
 
 The input files can either be templates using the Macro (using the `--macro` flag), or somewhat simpler configuration files using a different syntax.
 These configuration files can define permission sets inline, have references that turn into template parameters, and you can provide a base template that the resulting resources are layered on top of.
+
+# Build
+To build the `aws_sso_lib`, do the following:
+```
+pip install -q build
+cd lib
+python -m build
+```
+The .tar.gz and .whl will be created in `dist` directory.
